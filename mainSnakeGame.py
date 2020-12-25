@@ -52,6 +52,8 @@ def main():
         snake.direction(direction)
         if snake.collision_with_tail():
             gameover = True
+
+        # Checks if snake collides with the windows' bound
         if not gameover and not (
                 snake.snake_head()[0] > WIDTH or snake.snake_head()[1] < 0 or snake.snake_head()[0] < 0 or
                 snake.snake_head()[1] > HEIGHT):
@@ -73,10 +75,12 @@ def main():
                 snake.grow()
             CLOCK.tick(SNAKE_SPEED)
         else:
+            # this else only happens with the snake dies
             if \
                     snake.snake_head()[0] > WIDTH or snake.snake_head()[1] < 0 or snake.snake_head()[0] < 0 or \
-                            snake.snake_head()[1] > HEIGHT:
+                            snake.snake_head()[1] > HEIGHT:  # if death by out of bound then make bool gameover = True
                 gameover = True
+            # brings up user's current score and highest score from current session
             while gameover:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
